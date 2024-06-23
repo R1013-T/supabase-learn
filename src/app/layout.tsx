@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Link from "next/link";
+import { cn } from "@/lib/utils";
+import { buttonVariants } from "@/components/ui/button";
+import { Toaster } from "@/components/ui/sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,8 +19,25 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="ja">
+      <body className={cn(inter.className, "min-h-dvh")}>
+        <header className="h-16 gap-3 border-b px-6 flex items-center">
+          <Link href="/" className={buttonVariants({ variant: "ghost" })}>
+            Home
+          </Link>
+          <Link href="/about" className={buttonVariants({ variant: "ghost" })}>
+            About
+          </Link>
+          <Link href="/mypage" className={buttonVariants({ variant: "ghost" })}>
+            MyPage
+          </Link>
+        </header>
+        {children}
+        <footer className="h-16 sticky top-full border-t px-6 flex items-center">
+          <Link href="/">footer</Link>
+        </footer>
+        <Toaster richColors/>
+      </body>
     </html>
   );
 }
